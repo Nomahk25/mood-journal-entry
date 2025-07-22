@@ -5,11 +5,9 @@ const entriesList = document.getElementById('entriesList');
 const darkToggle = document.getElementById('darkModeToggle');
 const themeIcon = document.getElementById('themeIcon');
 
-// Simple word-based sentiment analysis
 const positiveWords = ['happy', 'joy', 'love', 'excited', 'good', 'great', 'awesome', 'fantastic', 'smile', 'thankful'];
 const negativeWords = ['sad', 'angry', 'bad', 'hate', 'terrible', 'upset', 'annoyed', 'depressed', 'worried', 'tired'];
 
-// Set background image based on mood
 function setMoodBackground(mood) {
   document.body.classList.remove('positive', 'neutral', 'negative');
   document.body.classList.add(mood);
@@ -30,7 +28,6 @@ function setMoodBackground(mood) {
   document.body.style.backgroundImage = `url('${bgImage}')`;
 }
 
-// Analyze mood using word matching
 function analyzeSentiment(text) {
   text = text.toLowerCase();
   let posCount = 0, negCount = 0;
@@ -48,7 +45,6 @@ function analyzeSentiment(text) {
   else return 'neutral';
 }
 
-// Save entry
 function saveEntry() {
   const text = journalEntry.value.trim();
   if (!text) {
@@ -69,7 +65,6 @@ function saveEntry() {
   renderEntries();
 }
 
-// Display mood and update background
 function displayMood(sentiment) {
   const moodMessages = {
     positive: '😊 Positive Mood',
@@ -81,7 +76,6 @@ function displayMood(sentiment) {
   setMoodBackground(sentiment);
 }
 
-// Render saved entries
 function renderEntries() {
   const entries = JSON.parse(localStorage.getItem('moodEntries')) || [];
   entriesList.innerHTML = '';
@@ -94,11 +88,10 @@ function renderEntries() {
   });
 
   if (entries[0]) {
-    displayMood(entries[0].sentiment); // Use latest mood for background
+    displayMood(entries[0].sentiment); 
   }
 }
 
-// Toggle dark mode
 function toggleDarkMode() {
   document.body.classList.toggle('dark');
   const isDark = document.body.classList.contains('dark');
@@ -106,7 +99,6 @@ function toggleDarkMode() {
   localStorage.setItem('darkMode', isDark ? 'true' : 'false');
 }
 
-// Load dark mode on page load
 function loadThemePreference() {
   const isDark = localStorage.getItem('darkMode') === 'true';
   if (isDark) {
@@ -115,7 +107,6 @@ function loadThemePreference() {
   }
 }
 
-// Init
 saveBtn.addEventListener('click', saveEntry);
 darkToggle.addEventListener('click', toggleDarkMode);
 loadThemePreference();
